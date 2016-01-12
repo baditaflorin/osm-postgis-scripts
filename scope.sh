@@ -13,10 +13,10 @@ for i in {4..101} {21..111} ; do echo -en "\e[38;5;${i}m#\e[0m" ; done ; echo
 echo "Welcome to SCOPE - (databaSe Creator Osmosis Postgis loadEr)"
 echo "Enter the name of the PostgreSQL user account"
 read user
-echo "The PostgreSQL user is " $user
+echo "$(tput setaf 3) The PostgreSQL user is " $user $(tput sgr 0)
 echo "Please enter the database name in this format Country_Code-YYMMDD ( RO-160107 )"
 read database
-echo the database name is $database
+echo "$(tput setaf 3)"the database name is $database $(tput sgr 0)
 createdb -O $user $database
 psql -U $user -d $database -c 'CREATE EXTENSION hstore;'
 psql -U $user -d $database -c 'CREATE EXTENSION postgis;'
@@ -27,12 +27,12 @@ echo "Part 2 - Ready for some osmosis fun importing the osm file ? Press CTRL+Z 
 echo "Enter the name of the file, without the extension ( example : romania-latest.osm.pbf will be romania-latest  )"
 read osmfile
 echo "The script assume that the location of the PostgreSQL host is localhost, if you disagree with this location, change the script and point it to the right location"
-echo "Enter password for user " $user "( better safe them sorry )"
+echo "$(tput setaf 3) Enter password for user " $user "( better safe them sorry )" $(tput sgr 0)
 read -s pass
 #echo "Setting 16 GB RAM for this task to the server"
 #set JAVACMD_OPTIONS= -Xmx16G
 sudo osmosis -v --rbf $osmfile.osm.pbf --wp host=localhost database=$database user=$user password=$pass
 echo -e "\vThis \vscript \vis \vdone \v \vCluj \vMap Analyst Team \vTelenav" 
 for i in {4..101} {21..111} ; do echo -en "\e[38;5;${i}m#\e[0m" ; done ; echo
-echo "Find Postgis Scripts and snippents of code that you can use here https://github.com/baditaflorin/postgis-openstreetmap-script-repository-for-osmosis-pgsnapshot-schema"
+echo "Find Postgis Scripts and snippents of code that you can use here https://github.com/baditaflorin/osm-postgis-scripts/
 echo "It is a Open Source Project, so you can also contribuite with you Postgis Code to make the repository more complete"
