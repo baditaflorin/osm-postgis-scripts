@@ -3,6 +3,7 @@
 -- #Date: DD.MM.YY
 -- #Website: __________________________________
 -- #Email: __________________________________
+-- #Licence AGPLv3+ - https://github.com/baditaflorin/osm-postgis-scripts/blob/master/LICENSE
 /* #Example of Use: _________________________________________________________ */
 -- #Start Code
 
