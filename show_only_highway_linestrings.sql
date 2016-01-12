@@ -3,6 +3,7 @@
 -- #Date: 01.08.16
 -- #Website: https://www.openstreetmap.org/user/baditaflorin
 -- #Email: baditaflorin@gmail.com
+-- #Licence AGPLv3+ - https://github.com/baditaflorin/osm-postgis-scripts/blob/master/LICENSE
 /* #Example of Use: This is usefull when you want to produce statistics only about the roads, 
 the most used tags that are used in the highways,etc */
 -- #Start Code
