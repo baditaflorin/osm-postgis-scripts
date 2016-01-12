@@ -6,8 +6,12 @@
 /* #Example of Use: This is usefull when you want to produce statistics only about the roads, 
 the most used tags that are used in the highways,etc */
 -- #Start Code
-SELECT
- user_id, tstamp, changeset_id, version, ways.id as ways_ids, linestring,users.id as u_ids,users.name as osm_name,
+-- # This is created so you don`t have problems loading the file into QGIS, and also so that QGIS to recognize this Column as the column that have only unique values
+SELECT ROW_NUMBER() over () as id,
+ user_id, tstamp, changeset_id, version, ways.id as ways_ids, 
+-- # linestring as geom changes the name of the column to be geom, 
+ linestring as geom,
+ users.id as u_ids,users.name as osm_name,
  
 -- # General Relevance Tags 
 -- #Keep the semicolon at the end, we will leave empty at the last section, internal mappers tags  
@@ -57,5 +61,5 @@ WHERE ST_GeometryType(linestring) = 'ST_LineString'
 -- # Link the name of the user with the id, so we can also have the name, not just the id of the user 
 AND users.id=ways.user_id 
 -- # Filter and keep just the linestrings that have the key highway
-AND (ways.tags -> 'highway'::text) IS NOT NULL;
+AND (ways.tags -> 'highway'::text) IS NOT NULL
 -- #End Code
