@@ -36,6 +36,9 @@ Service - you can leave it blank
 
 - Step 3.B - Qgis DB Manager 
 Go to Database -> DB Manager -> DB Manager
+
+<img scr=https://cloud.githubusercontent.com/assets/2330999/12267378/7fd62b74-b950-11e5-8ad9-3c50b39a8caf.PNG" width="90%"><img>
+
 In the new window, select Postgis, find the Database that you had created, click the + button, Select Public
 With the public selected, go to Database -> SQL Window 
 Find the script that you want to run from here https://github.com/baditaflorin/osm-postgis-scripts and paste the code into the upper window and hit Execute ( F5 )
