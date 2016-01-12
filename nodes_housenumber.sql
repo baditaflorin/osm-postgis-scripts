@@ -30,22 +30,22 @@ users.id as u_ids,users.name as osm_name,
  
 -- # General Relevance Tags 
 -- #leave empty the end of the last tag, don`t end it with the semicolon 
-tags->'name' As name,
+nodes.tags->'name' As n_name,
  
 -- #Specific Tags 
 -- #leave empty the end of the last tag, don`t end it with the semicolon 
- tags->'addr:housenumber' As addr_housenumber,
- tags->'addr:interpolation' As addr_interpolation,
- tags->'addr:housename' As addr_housename,
- tags->'addr:city' As addr_city,
- tags->'addr:postcode' As addr_postcode,
+ nodes.tags->'addr:housenumber' As n_addr_housenumber,
+ nodes.tags->'addr:interpolation' As n_addr_interpolation,
+ nodes.tags->'addr:housename' As n_addr_housename,
+ nodes.tags->'addr:city' As n_addr_city,
+ nodes.tags->'addr:postcode' As n_addr_postcode,
 
 -- #Internal mappers tags
 -- #leave empty the end of the last tag, don`t end it with the semicolon 
-tags->'source' As source,
-tags->'attribution' As attribution,
-tags->'comment' As comment,
-tags->'fixme' As fixme,
-tags->'created_by' As created_by
+nodes.tags->'source' As n_source,
+nodes.tags->'attribution' As n_attribution,
+nodes.tags->'comment' As n_comment,
+nodes.tags->'fixme' As n_fixme,
+nodes.tags->'created_by' As n_created_by
 FROM nodes,users
 WHERE ST_GeometryType(geom) = 'ST_Point' AND users.id=nodes.user_id AND ((tags->'addr:housenumber')) is not null
