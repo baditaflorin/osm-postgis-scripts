@@ -34,12 +34,12 @@ Service - you can leave it blank
 <img src="http://i.imgur.com/ZdS4Hm1.png" width="50%"></img> 
 
 - Step 3.B - Qgis DB Manager 
-<img src="https://cloud.githubusercontent.com/assets/2330999/12267378/7fd62b74-b950-11e5-8ad9-3c50b39a8caf.PNG" width="50%"></img> 
 
 Go to Database -> DB Manager -> DB Manager
 In the new window, select Postgis, find the Database that you had created, click the + button, Select Public
 With the public selected, go to Database -> SQL Window 
 Find the script that you want to run from here https://github.com/baditaflorin/osm-postgis-scripts and paste the code into the upper window and hit Execute ( F5 )
+<img src="https://cloud.githubusercontent.com/assets/2330999/12267378/7fd62b74-b950-11e5-8ad9-3c50b39a8caf.PNG" width="90%"></img> 
 
 If you want to load it as a file, check at the bottom the "Load as new Layer" and select for Colums(s) with unique values the "id" column, and for Geometry column add the "geom" column and click Load now!
 
