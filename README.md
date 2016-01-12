@@ -31,4 +31,4 @@ You will get a new window, add the folowing :
 Name : the name of the connection
 Service - you can leave it blank
 
-<img src="http://i.imgur.com/ZdS4Hm1.png" width="90%"></img> 
+<img src="http://i.imgur.com/ZdS4Hm1.png" width="50%"></img> 
