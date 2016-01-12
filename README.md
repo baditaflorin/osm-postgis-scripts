@@ -13,6 +13,7 @@ Linux, Postgresql 9.x, Postgis 2.x, Osmosis 0.43+ , Qgis 2.12.2+
 
 Installation : 
 
+- Watch the video and see that the process is simple, or read the text description :
 - Step 1.A
 
 Using a terminal, download into a folder the scope.sh file
