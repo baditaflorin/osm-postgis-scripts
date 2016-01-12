@@ -6,9 +6,19 @@
 /* #Example of Use: This is usefull when you want to produce statistics only about the roads, 
 the most used tags that are used in the highways,etc */
 -- #Start Code
+
+/* Abrevations list 
+
+relation_members = rl_
+relations = r_
+ways = w_
+nodes = n_
+users = u_
+*/
+
 -- # This is created so you don`t have problems loading the file into QGIS, and also so that QGIS to recognize this Column as the column that have only unique values
 SELECT ROW_NUMBER() over () as id,
- user_id, tstamp, changeset_id, version, ways.id as ways_ids, 
+ user_id, tstamp, changeset_id, version, ways.id as w_ids, 
 -- # linestring as geom changes the name of the column to be geom, 
  linestring as geom,
  users.id as u_ids,users.name as osm_name,
