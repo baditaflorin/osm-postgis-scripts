@@ -3,6 +3,7 @@
 -- #Date: 01.12.16
 -- #Website: https://www.openstreetmap.org/user/baditaflorin
 -- #Email: baditaflorin@gmail.com
+-- #Licence AGPLv3+ - https://github.com/baditaflorin/osm-postgis-scripts/blob/master/LICENSE
 /* #Example of Use: This is usefull when you want to produce statistics about the housenumbers, to see in a visual way in Qgis who added housenumbers in a city, etc */
 -- #Start Code
 
