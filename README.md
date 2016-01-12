@@ -5,13 +5,14 @@ This Github Repo was made because :
 
 Is really hard at the moment to load a osm.pbf file into Postgis
 Once you have a osm.pbf file into PostGis, it`s hard to process the data, load the data into Qgis for visual oversight,etc
+
 If we are using the same code structure and respecting the same standards, then we can also create and share Qgis Styles that can be re-used, simplifying the process needed by experts of amateurs to load and visualize OpenStreetMap data.
 
 - Requirements : 
 
 Linux, Postgresql 9.x, Postgis 2.x, Osmosis 0.43+ , Qgis 2.12.2+
 
-Installation : 
+Installation :  Simple version - look at this video https://www.youtube.com/watch?v=vhJQbKey9EI
 
 - Step 1.A
 
