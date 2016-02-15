@@ -34,5 +34,5 @@ read -s pass
 sudo osmosis -v --rbf $osmfile.osm.pbf --wp host=localhost database=$database user=$user password=$pass
 echo -e "\vThis \vscript \vis \vdone \v \vCluj \vMap Analyst Team \vTelenav" 
 for i in {4..101} {21..111} ; do echo -en "\e[38;5;${i}m#\e[0m" ; done ; echo
-echo "Find Postgis Scripts and snippents of code that you can use here https://github.com/baditaflorin/osm-postgis-scripts/
+echo "Find Postgis Scripts and snippents of code that you can use here https://github.com/baditaflorin/osm-postgis-scripts"
 echo "It is a Open Source Project, so you can also contribuite with you Postgis Code to make the repository more complete"
