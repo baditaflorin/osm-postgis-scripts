@@ -85,7 +85,7 @@ FROM ( SELECT ( ST_Dump(makegrid_2d(ST_GeomFromText(ST_asText(ST_makepolygon(ST_
 10000))).geom cell from nodes ) as grid -- 10000 is the cell step in meters
 -- we join the cell grid with the nodes, via a inner join.
 inner join nodes n on st_contains(cell,geom)
-group by count;
+group by cell;
 
 -- We display the data that is in the cell_grid table that we made 
 SELECT id, geom, count from cell_grid
