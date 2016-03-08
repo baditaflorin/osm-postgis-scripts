@@ -8,7 +8,8 @@
 -- #Start Code
 
 /* #TODO #FIXME
-Qgis not loading the table now ...
+Qgis not loading the table now ... Need to split the file into a 2 way process
+- Need to change the grid so that will use the Geography instead of Geometry, for more correct Grid Creation
  */
 /* Abrevations list 
 relation_members = rl_
