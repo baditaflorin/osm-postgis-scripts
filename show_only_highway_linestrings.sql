@@ -62,7 +62,7 @@ ways.tags->'bus' As w_bus,
 -- #Internal mappers tags
 -- #leave empty the end of the last tag, don`t end it with the semicolon 
 ways.tags->'source' As w_source,
-ways.tags->'attribution' w_As attribution,
+ways.tags->'attribution' As w_attribution,
 ways.tags->'comment' As w_comment,
 ways.tags->'fixme' As w_fixme,
 ways.tags->'created_by' As w_created_by
