@@ -1,5 +1,3 @@
--- This script uses UNION ALL to load the script for showing the addr_housenumbers with the script that show the ways housenumbers 
-
 -- #Version: 0.1
 -- #Author: Florin Badita
 -- #Date: 01.12.16
@@ -10,8 +8,7 @@
 -- #Start Code
 
 /* #TODO #FIXME
-This will only load the ways, but housenumbers are made out of nodes and ways.
-In this form, this script will only load the nodes, not the ways */
+This will load the nodes and ways, and will convert the ways using ST_centroid to get a node for each way. This script will not tell you if the original was a way or a node */
 
 /* Abrevations list 
 relation_members = rl_
@@ -22,8 +19,10 @@ users = u_
 */
 
 -- # This is created so you don`t have problems loading the file into QGIS, and also so that QGIS will recognize this Column as the column that have only unique values
-SELECT ROW_NUMBER() over () as id,
- user_id, tstamp, changeset_id, version, ways.id as ways_ids, 
+-- # We create the ROW_NUMBER() here, because if not it will generate 2 starting sequences, one for the nodes and one for the ways, and then QGIS will not allow us to load the data, because we don`t have a unique ID. SOURCE http://stackoverflow.com/questions/5190240/row-number-with-union-query
+
+SELECT ROW_NUMBER() over () as id,* from 
+( SELECT user_id, tstamp, changeset_id, version, ways.id as ways_ids, 
  -- # this will make the column name be geom, that will enable Qgis DB manager to figure it out that this is the column that holds geometry data
  ST_centroid(ways.linestring) as geom,
  
@@ -76,8 +75,7 @@ users = u_
 */
 
 -- # This is created so you don`t have problems loading the file into QGIS, and also so that QGIS will recognize this Column as the column that have only unique values
-SELECT ROW_NUMBER() over () as id,
- user_id, tstamp, changeset_id, version, nodes.id as node_ids, 
+SELECT user_id, tstamp, changeset_id, version, nodes.id as node_ids, 
  -- # this will make the column name be geom, that will enable Qgis DB manager to figure it out that this is the column that holds geometry data
  nodes.geom as geom,
  
@@ -103,4 +101,4 @@ nodes.tags->'comment' As n_comment,
 nodes.tags->'fixme' As n_fixme,
 nodes.tags->'created_by' As n_created_by
 FROM nodes,users
-WHERE ST_GeometryType(geom) = 'ST_Point' AND users.id=nodes.user_id AND ((tags->'addr:housenumber')) is not null
+WHERE ST_GeometryType(geom) = 'ST_Point' AND users.id=nodes.user_id AND ((tags->'addr:housenumber')) is not null ) nodes_and_ways
