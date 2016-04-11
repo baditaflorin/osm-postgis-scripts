@@ -1,0 +1,86 @@
+-- #Version: 0.1
+-- #Author: Florin Badita
+-- #Date: 01.12.16
+-- #Website: https://www.openstreetmap.org/user/baditaflorin
+-- #Email: baditaflorin@gmail.com
+-- #Licence AGPLv3+ - https://github.com/baditaflorin/osm-postgis-scripts/blob/master/LICENSE
+/* #Example of Use: This is usefull when you want show only the buildings  */
+-- #Start Code
+
+/* #TODO #FIXME
+This will only load the ways, but usualy route relations are made out of ways and nodes.
+In this form, this script will only load the ways, not the nodes */
+/* Abrevations list 
+
+relation_members = rl_
+relations = r_
+ways = w_
+*/
+
+-- # This is created so you don`t have problems loading the file into QGIS, and also so that QGIS to recognize this Column as the column that have only unique values
+SELECT ROW_NUMBER() over () as id,
+ user_id,  users.name as osm_name,tstamp, changeset_id, version, ways.id as w_ids, 
+-- # linestring as geom changes the name of the column to be geom, 
+ linestring as geom,
+
+ users.name as osm_name,
+-- OLD COMMENT Create a column for ways that will count the number of keys in each row.
+ array_length(avals(ways.tags), 1) AS w_count_keys,
+
+
+--  The day of the week as Sunday (0) to Saturday (6)
+extract(dow from ways.tstamp) as r_day_of_the_week,
+
+
+-- done -- Max nodes per way segment
+ST_NPoints(ways.linestring) AS w_points_per_way,
+
+-- ways --
+-- #Internal mappers tags
+-- #leave empty the end of the last tag, don`t end it with the semicolon 
+ways.version as w_version,
+ways.changeset_id as w_changeset_id,
+ways.user_id as w_user_id,
+ways.tstamp as w_tstamp,
+date_trunc('day',ways.tstamp) as w_day,
+date_trunc('month',ways.tstamp) as w_month,
+date_part('year', ways.tstamp) as w_year,
+
+-- # ways - General Relevance Tags 
+-- #Keep the semicolon at the end, we will leave empty at the last section, internal mappers tags  
+ways.id as w_id,
+ways.tags->'name' As w_name,
+
+-- #Specific Tags 
+-- #Keep the semicolon at the end, we will leave empty at the last section, internal mappers tags  
+ways.tags as w_tags,
+
+ways.tags->'amenity' As amenity,
+ways.tags->'shop' As shop,
+ways.tags->'shop' As shop,
+
+
+ ways.tags->'addr:housenumber' As n_addr_housenumber,
+ ways.tags->'addr:street' As n_addr_interpolation,
+ ways.tags->'addr:housename' As n_addr_housename,
+ ways.tags->'addr:city' As n_addr_city,
+ ways.tags->'addr:postcode' As n_addr_postcode,
+
+ways.tags->'source' As w_source,
+ways.tags->'attribution' As w_attribution,
+ways.tags->'comment' As w_comment,
+ways.tags->'fixme' As w_fixme,
+ways.tags->'created_by' As w_created_by,
+
+-- geom from ways --
+
+-- we add the name geom to ways.linestring so that Qgis will know automaticly that this is the column that holds geometry data
+ways.linestring as geom
+
+from ways,users
+where users.id=ways.user_id 
+-- Other type of relations will not be loaded with this script. this will filter and load only the tags that have set as type=route 
+AND (ways.tags ->'building') is not null
+--limit 1000
+-- #End Code
+--limit 500
