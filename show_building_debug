@@ -4,7 +4,8 @@
 -- #Website: https://www.openstreetmap.org/user/baditaflorin
 -- #Email: baditaflorin@gmail.com
 -- #Licence AGPLv3+ - https://github.com/baditaflorin/osm-postgis-scripts/blob/master/LICENSE
-/* #Example of Use: This is usefull when you want show only the buildings  */
+/* #Example of Use: This is usefull when you want to produce statistics about the routes, 
+the most used tags that are used in the routes, network, etc */
 -- #Start Code
 
 /* #TODO #FIXME
@@ -16,14 +17,12 @@ relation_members = rl_
 relations = r_
 ways = w_
 */
-
+CREATE TABLE building as 
 -- # This is created so you don`t have problems loading the file into QGIS, and also so that QGIS to recognize this Column as the column that have only unique values
 SELECT ROW_NUMBER() over () as id,
  user_id,  users.name as osm_name,tstamp, changeset_id, version, ways.id as w_ids, 
--- # linestring as geom changes the name of the column to be geom, 
- linestring as geom,
 
- users.name as osm_name,
+
 -- OLD COMMENT Create a column for ways that will count the number of keys in each row.
  array_length(avals(ways.tags), 1) AS w_count_keys,
 
@@ -57,7 +56,6 @@ ways.tags as w_tags,
 
 ways.tags->'amenity' As amenity,
 ways.tags->'shop' As shop,
-ways.tags->'shop' As shop,
 
 
  ways.tags->'addr:housenumber' As n_addr_housenumber,
@@ -75,6 +73,7 @@ ways.tags->'created_by' As w_created_by,
 -- geom from ways --
 
 -- we add the name geom to ways.linestring so that Qgis will know automaticly that this is the column that holds geometry data
+-- # linestring as geom changes the name of the column to be geom, 
 ways.linestring as geom
 
 from ways,users
@@ -83,4 +82,3 @@ where users.id=ways.user_id
 AND (ways.tags ->'building') is not null
 --limit 1000
 -- #End Code
---limit 500
