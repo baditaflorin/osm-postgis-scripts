@@ -54,6 +54,6 @@ group by r.id
 -- ADD /* before the first -- caracters of this line. Comment this code to get all the 'boundary'='administrative' polygons 
 -- We have used the ST_boundary to check if a polygon is closed, because the classic command ST_isclosed(a.r_polygon) seems not to work. I don`t know why, but anyhow, this works :)
 where ST_isclosed(ST_Boundary(a.r_polygon))= 'f'
--- we filter so that we only get the al=4
-AND r.tags->'admin_level' = '4'
+-- we filter so that we only get the al=6
+AND r.tags->'admin_level' = '6'
 -- comment this code to get all the 'boundary'='administrative' polygons */
