@@ -28,8 +28,10 @@ select ROW_NUMBER() over () as id,
 r.user_id,r.changeset_id,r.tstamp r_tstamp,r.version r_version, relation_id r_id,
 -- some more useful information that we get from the Hstore tags. 
 r.tags->'name' boundary_name, r.tags->'admin_level' r_admin_level,
--- Here we get the geometry of the combined polygon. 
-a.r_polygon geom
+/* Here we get the geometry of the combined polygon. 
+We use ST_BuildArea because the polygon is made out of multiple linestrings that are not in order, so we cannot use ST_makepolygon, we will get an error. */ 
+
+ST_BuildArea(a.r_polygon) geom
 
 /* -- debug purpouses only 
 ,ST_Boundary(a.r_polygon) geom_debug_unclosed,
