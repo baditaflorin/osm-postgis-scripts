@@ -1,36 +1,9 @@
--- #Version: 0.1
--- #Author: Florin Badita
--- #Date: 12.04.16
--- #Website: https://www.openstreetmap.org/user/baditaflorin
--- #Email: baditaflorin@gmail.com
--- #Licence AGPLv3+ - https://github.com/baditaflorin/osm-postgis-scripts/blob/master/LICENSE
-/* #Example of Use: Count the number of restaurants inside each admin_level=4
+-- all the time when we run the code, we drop the old table, recreating the table. 
+drop table if exists al_4;
+create table al_4 as 
 
-Extremly slow query, usualy the speed is around 10 queryes for seconds. 
-
-For Romania, we have 500,000 ways, that means that it will take around 50,000 seconds to complete, or around 12 hours
-
- */
--- #Start Code
-
-/* #TODO #FIXME
-This will only load the ways that are a complete polygon */
-
-/* Abrevations list 
-relation_members = rl_
-relations = r_
-ways = w_
-nodes = n_
-users = u_
-a = the Inner Join that we have created
-*/
-
-/* For every relation, create a polygon from all the linestrings that are composed from that relation */ 
-select al_4.boundary_name,count(*) count from 
-
-( 
 -- # This is created so you don`t have problems loading the file into QGIS, and also so that QGIS will recognize this Column as the column that have only unique values
-SELECT ROW_NUMBER() over () as id, 
+SELECT ROW_NUMBER() over () as id , 
 -- useful information that we get from the relations table
 r.user_id,r.changeset_id,r.tstamp r_tstamp,r.version r_version, relation_id r_id,
 -- some more useful information that we get from the Hstore tags. 
@@ -66,11 +39,20 @@ where ST_isclosed(ST_Boundary(a.r_polygon))= 'f'
 -- we filter so that we only get the al=4
 AND r.tags->'admin_level' = '4'
 -- comment this code to get all the 'boundary'='administrative' polygons */
-) al_4
+;
+
+
+------------------------------------------------------------------------
+------------------------------------------------------------------------
+------------------------------------------------------------------------
+
+-- all the time when we run the code, we drop the old table, recreating the table. 
+drop table if exists amenity;
+
+create table amenity as Select ROW_NUMBER() over () as id, * from (
 
 
 -- insert the filter that will leave you with only yhe nodes, ways that you want, so we can count them inside each al_4 
-inner join (
 
 SELECT user_id, tstamp, changeset_id, version, ways.id as ways_ids, 
  -- # this will make the column name be geom, that will enable Qgis DB manager to figure it out that this is the column that holds geometry data
@@ -168,7 +150,32 @@ nodes.tags->'created_by' As n_created_by
 FROM nodes,users
 WHERE ST_GeometryType(geom) = 'ST_Point' AND users.id=nodes.user_id AND ((tags->'amenity')) is not null 
 AND tags->'amenity'='restaurant'
+) subquery;
 
-) as inner_join on st_contains( ST_BuildArea(al_4.geom),inner_join.geom)
+-- ALTER TABLE al_4 DROP CONSTRAINT al_4_pkey;
+
+ALTER TABLE al_4
+  ADD CONSTRAINT al_4_pkey PRIMARY KEY(id);
+
+CREATE INDEX al_4_index
+  ON al_4
+  USING gist
+  (geom);
+
+
+ALTER TABLE amenity
+  ADD CONSTRAINT amenity_pkey PRIMARY KEY(id);
+
+CREATE INDEX amenity_index
+  ON amenity
+  USING gist
+  (geom);
+
+
+
+-----
+
+select al_4.boundary_name,count (*) from amenity 
+inner join al_4 on st_contains(al_4.geom,amenity.geom)
 
 group by al_4.boundary_name
