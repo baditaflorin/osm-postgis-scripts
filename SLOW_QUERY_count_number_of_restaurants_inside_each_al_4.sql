@@ -4,7 +4,7 @@
 -- #Website: https://www.openstreetmap.org/user/baditaflorin
 -- #Email: baditaflorin@gmail.com
 -- #Licence AGPLv3+ - https://github.com/baditaflorin/osm-postgis-scripts/blob/master/LICENSE
-/* #Example of Use: Count the lenght of the highway inside each admin_level=4
+/* #Example of Use: Count the number of restaurants inside each admin_level=4
 
 Extremly slow query, usualy the speed is around 10 queryes for seconds. 
 
