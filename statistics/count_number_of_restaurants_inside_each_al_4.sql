@@ -179,3 +179,4 @@ select al_4.boundary_name,count (*) from amenity
 inner join al_4 on st_contains(al_4.geom,amenity.geom)
 
 group by al_4.boundary_name
+order by al_4.boundary_name
