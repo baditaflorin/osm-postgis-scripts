@@ -17,7 +17,7 @@ relation_members = rl_
 relations = r_
 ways = w_
 */
-
+create table relation_route as
 -- # This is created so you don`t have problems loading the file into QGIS, and also so that QGIS to recognize this Column as the column that have only unique values
 SELECT ROW_NUMBER() over (order by ways.id) as id,
 
