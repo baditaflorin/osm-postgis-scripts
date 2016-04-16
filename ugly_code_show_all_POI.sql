@@ -1,4 +1,4 @@
--- #Version: 0.1
+Create table all_poi as-- #Version: 0.1
 -- #Author: Florin Badita
 -- #Date: 01.12.16
 -- #Website: https://www.openstreetmap.org/user/baditaflorin
@@ -620,4 +620,6 @@ FROM nodes,users
 WHERE ST_GeometryType(geom) = 'ST_Point' AND users.id=nodes.user_id AND ((tags->'sport')) is not null 
 
 
-) nodes_and_ways
+) nodes_and_ways;
+
+select * from all_poi
