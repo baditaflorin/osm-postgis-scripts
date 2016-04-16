@@ -105,3 +105,4 @@ nodes.tags->'created_by' As n_created_by
 FROM nodes,users
 WHERE ST_GeometryType(geom) = 'ST_Point' AND users.id=nodes.user_id AND ((tags->'addr:housenumber')) is not null ) nodes_and_ways); 
 
+select * from addr_housenumbers
