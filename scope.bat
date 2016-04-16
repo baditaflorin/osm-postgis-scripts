@@ -17,8 +17,8 @@ createdb -O %user% %database%
 psql -U %user% -d %database% -c "CREATE EXTENSION hstore;"
 psql -U %user% -d %database% -c "CREATE EXTENSION postgis;"
 
-bitsadmin.exe /transfer "Download pgsnapshot_schema_0.6.sql" https://raw.githubusercontent.com/openstreetmap/osmosis/master/package/script/pgsnapshot_schema_0.6.sql %cd%\pgsnapshot_schema_0.6.sql
-bitsadmin.exe /transfer "Download pgsnapshot_schema_0.6.sql" https://raw.githubusercontent.com/openstreetmap/osmosis/master/package/script/pgsnapshot_schema_0.6_linestring.sql %cd%\pgsnapshot_schema_0.6_linestring.sql
+Echo bitsadmin.exe /transfer "Download pgsnapshot_schema_0.6.sql" https://raw.githubusercontent.com/openstreetmap/osmosis/master/package/script/pgsnapshot_schema_0.6.sql %cd%\pgsnapshot_schema_0.6.sql
+Echo bitsadmin.exe /transfer "Download pgsnapshot_schema_0.6.sql" https://raw.githubusercontent.com/openstreetmap/osmosis/master/package/script/pgsnapshot_schema_0.6_linestring.sql %cd%\pgsnapshot_schema_0.6_linestring.sql
 
 psql -U %user% -d %database% -f pgsnapshot_schema_0.6.sql
 psql -U %user% -d %database% -f pgsnapshot_schema_0.6_linestring.sql
