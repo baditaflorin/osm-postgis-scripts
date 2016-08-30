@@ -1,5 +1,5 @@
 -- #Version: 0.1
--- #Author: Florin Badita
+-- #Author: Florin Badita,Vasile Ceteras
 -- #Date: 30.08.16
 -- #Website: http://www.openstreetmap.org/user/baditaflorin/diary
 -- #Email: baditaflorin@gmail.com
