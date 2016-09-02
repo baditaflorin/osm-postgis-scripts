@@ -2,5 +2,5 @@
 |----------------------|---|---|-------|---|
 | Municipiul București |   |   | 505   |   |
 
-#| North America | size : 7GB | 58M ways |
+| North America | size : 7GB | 58M ways |
 
