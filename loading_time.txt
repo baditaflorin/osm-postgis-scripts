@@ -1,2 +1,3 @@
 south america pbf size ~950Mb -- time to load 7495796 milliseconds (2 hours)
+North America pbf size ~7Gb -- Total execution time: 93403048 milliseconds. (26 hours)
 
