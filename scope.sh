@@ -17,7 +17,7 @@ echo "$(tput setaf 3) The PostgreSQL user is " $user $(tput sgr 0)
 echo "Please enter the database name in this format Country_Code-YYMMDD ( RO-160107 )"
 read database
 echo "$(tput setaf 3)"the database name is $database $(tput sgr 0)
-createdb -O $user $database
+createdb -O $user $database -U $user
 psql -U $user -d $database -c 'CREATE EXTENSION hstore;'
 psql -U $user -d $database -c 'CREATE EXTENSION postgis;'
 psql -U $user -d $database -f /usr/share/doc/osmosis/examples/pgsnapshot_schema_0.6.sql
