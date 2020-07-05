@@ -12,20 +12,36 @@ If we are using the same code structure and respecting the same standards, then 
 
 Linux, Postgresql 9.x, Postgis 2.x, Osmosis 0.43+ , Qgis 2.12.2+
 
+```
+sudo apt install postgresql-12-postgis-3
+
+#Osmosis Install
+wget https://github.com/openstreetmap/osmosis/releases/download/0.48.1/osmosis-0.48.1.tgz 
+mkdir osmosis
+mv osmosis-0.48.1.tgz osmosis
+cd osmosis
+tar xvfz osmosis-0.48.1.tgz
+rm osmosis-0.48.1.tgz
+chmod a+x bin/osmosis
+bin/osmosis
+```
+
 Installation :  Simple version - look at this video https://www.youtube.com/watch?v=vhJQbKey9EI
 
 - Step 1.A
 
 Using a terminal, download into a folder the scope.sh file
 After you download, set the file to be executable by using 
+```
 chmod +x scope.sh
-
+```
 - Step 1.B
 
 Go to http://download.geofabrik.de/ or another website and download in the same folder where the scope.sh file is, the osm.pbf file that you are interested. 
 For example, from the terminal, i can do :
+```
 wget http://download.geofabrik.de/europe/malta-latest.osm.pbf
-
+```
 - Step 2
 
 Run the scope.sh file from the terminal and follow the instructions. 
