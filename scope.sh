@@ -16,18 +16,19 @@ read user
 echo "$(tput setaf 3) The PostgreSQL user is " $user $(tput sgr 0)
 echo "Please enter the database name in this format Country_Code-YYMMDD ( RO-160107 )"
 read database
+echo "First password is the sudo, the second time it ask is the postgres pass"
 echo "$(tput setaf 3)"the database name is $database $(tput sgr 0)
 createdb -O $user $database -U $user
 psql -U $user -d $database -c 'CREATE EXTENSION hstore;'
 psql -U $user -d $database -c 'CREATE EXTENSION postgis;'
-psql -U $user -d $database -f /usr/share/doc/osmosis/examples/pgsnapshot_schema_0.6.sql
-psql -U $user -d $database -f /usr/share/doc/osmosis/examples/pgsnapshot_schema_0.6_linestring.sql
+psql -U $user -d $database -f ./pgsnapshot_schema_0.6.sql
+psql -U $user -d $database -f ./pgsnapshot_schema_0.6_linestring.sql
 echo -e "\vFirst \vpart \vis \vdone \v \vCluj \vMap Analyst Team \vTelenav" 
 echo "Part 2 - Ready for some osmosis fun importing the osm file ? Press CTRL+Z to cancel"
 echo "Enter the name of the file, without the extension ( example : romania-latest.osm.pbf will be romania-latest  )"
 read osmfile
 echo "The script assume that the location of the PostgreSQL host is localhost, if you disagree with this location, change the script and point it to the right location"
-echo "$(tput setaf 3) Enter password for user " $user "( better safe them sorry )" $(tput sgr 0)
+echo "$(tput setaf 3) Enter password for Postgres user " $user "( better safe them sorry )" $(tput sgr 0)
 read -s pass
 #echo "Setting 16 GB RAM for this task to the server"
 #set JAVACMD_OPTIONS= -Xmx16G
